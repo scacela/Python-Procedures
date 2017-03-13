@@ -76,8 +76,8 @@ addrow(c, j, k, A)	returns a new matrix after adding c times the jth
 
 augment(A, B)		returns a new matrix after concatenating each row
 			of matrix B to the corresponding row of matrix A.
-			A and B must have the same number of rows, but may
-			have a different number of columns.
+			A and B must have the same number of rows, but
+			may have a different number of columns.
 
 ------------------------------------------------------------------------
 
@@ -86,60 +86,67 @@ Python Procedures II.
 
 
 
-isvectorset(x)		returns true if x is a list of vectors of the same
-			length, so that represents a set of vectors in Rn
-			for some value n, returns false otherwise.
+isvectorset(x)		returns true if x is a list of vectors of the
+			same length, so that represents a set of vectors
+			in Rn for some value n, returns false otherwise.
 
-ismatrix(x)		is a renaming of isvectorset(x) so that the procedure
-			can be used in the context of matrices rather than
-			that of sets of vectors.
+ismatrix(x)		is a renaming of isvectorset(x) so that the
+			procedure can be used in the context of matrices
+			rather than that of sets of vectors.
 
-determinant(A)		returns the determinant of matrix A (returns a single
-			number).
+determinant(A)		returns the determinant of matrix A (returns a
+			single number).
 
-issquare(A)		returns true if matrix A is square, returns false
-			otherwise.
+issquare(A)		returns true if matrix A is square, returns
+			false otherwise.
 
-islinind(x)		returns true if x is a list of linearly independent
-			vectors, and returns false if the vectors are linearly
-			dependent. Produces an error message if the argument
-			is not of the proper format.
+islinind(x)		returns true if x is a list of linearly
+			independent vectors, and returns false if the
+			vectors are linearly dependent. Produces an
+			error message if the argument is not of the
+			proper format.
 
-isextra(i, x)		returns true if the ith vector in the list of vectors
-			x is extra in the sense that:
+isextra(i, x)		returns true if the ith vector in the list of
+			vectors x is extra in the sense that:
 	
 			Span(x) = Span(x-{xi})
 
-			returns false if the spans are different. Produces a
-			descriptive error message if the argument is not of
-			the proper format.
+			returns false if the spans are different.
+			Produces a descriptive error message if the
+			argument is not of the proper format.
 
-coordinates(x, B)	returns the coordinates of the vector x with respect
-			to the basis B.
+coordinates(x, B)	returns the coordinates of the vector x with
+			respect to the basis B.
 
-isUT(M)			returns true if M is a square matrix that is upper
-			triangular, and returns false if M is not upper
-			triangular. Produces a descriptive error message if
-			the argument is not of the proper format.
+isUT(M)			returns true if M is a square matrix that is
+			upper triangular, and returns false if M is
+			not upper triangular. Produces a descriptive
+			error message if the argument is not of the
+			proper format.
 
-check_for_zeros(M,i,j)	checks matrix M to see if only zeros exist at or below
-			row i in column j, returns a list giving the count of
-			nonzero entries and the index of the first nonzero
-			value, in that order.
+check_for_zeros(M,i,j)	checks matrix M to see if only zeros exist at
+			or below row i in column j, returns a list
+			giving the count of nonzero entries and the
+			index of the first nonzero value, in that
+			order.
 
 swap(j, k, A)		(see Python Procedures I)
 
-make_ident(rows, cols)	returns the identity matrix with dimensions rows * cols.
+make_ident(rows, cols)	returns the identity matrix with dimensions
+			rows * cols.
 
-invertUT(M)		returns the inverse of the upper triangular matrix M,
-			assuming M is invertible.
+invertUT(M)		returns the inverse of the upper triangular
+			matrix M, assuming M is invertible.
 
-null(A)			returns a basis for the null space of matrix A.
+null(A)			returns a basis for the null space of
+			matrix A.
 
-span(S)			returns a basis for the span of the set of vectors S.
-			Produces a descriptive error message if the argument
-			is not of the proper format.
+span(S)			returns a basis for the span of the set of
+			vectors S. Produces a descriptive error
+			message if the argument is not of the proper
+			format.
 
-backsub(A, b)		returns the solution to the equation Ax = b, assuming
-			A is in upper triangular form, is square, and is
-			non-singular (has a nonzero determinant).
+backsub(A, b)		returns the solution to the equation Ax = b,
+			assuming A is in upper triangular form, is
+			square, and is non-singular (has a nonzero
+			determinant).
