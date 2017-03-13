@@ -5,8 +5,8 @@ Villanova University
 ------------------------------------------------------------------------
 
 These two projects required the construction of various functions written
-in Python.Each function performs its own operation on the argument(s) it passes.
-Arguments are either lists (vectors), or matrices (vectors of vectors).
+in Python.Each function performs its own operation on the argument(s) it
+passes. Arguments are either lists (vectors), or matrices (vectors of vectors).
 
 ------------------------------------------------------------------------
 
@@ -98,6 +98,6 @@ invertUT(M)		returns the inverse of the upper triangular matrix M, assuming M is
 
 null(A)			returns a basis for the null space of matrix A.
 
-span(S)			returns a basis for the span of the set of vectors S. Produces a descriptive error message if the 						argument is not of the proper format.
+span(S)			returns a basis for the span of the set of vectors S. Produces a descriptive error message if the argument is not of the proper format.
 
 backsub(A, b)		returns the solution to the equation Ax = b, assuming A is in upper triangular form, is square, and is non-singular (has a nonzero determinant)
