@@ -209,8 +209,13 @@ True
 False
 
 >>> A = [[2, 5], [-3, 7]]
+>>> B = [[2, 5], [-3, 7, 4]]
 >>> determinant(A)
 29
+>>> issquare(A)
+True
+>>> issquare(B)
+False
 >>> islinind(A)
 True
 >>> B = [[1, 2, 3, 4], [5, 6]]
