@@ -4,9 +4,9 @@ Sam Cacela
 Villanova University
 ------------------------------------------------------------------------
 
-These two projects required the construction of various functions written
-in Python. Each function is defined below. Parameters are either lists
-(vectors), or matrices (vectors of vectors).
+These files show my work for two projects that required the construction
+of various functions in Python. Each function is defined below.
+Parameters are either lists (vectors), or matrices (vectors of vectors).
 
 ------------------------------------------------------------------------
 
