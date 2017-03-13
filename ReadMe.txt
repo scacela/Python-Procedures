@@ -8,7 +8,7 @@ These files show my work for two projects that required the development
 of various Python procedures that perform operations associated with
 vector spaces, matrices, and linear transformations.
 
-All functions are defined below.
+The procedures are described below.
 
 ------------------------------------------------------------------------
 
