@@ -4,9 +4,11 @@ Sam Cacela
 Villanova University
 ------------------------------------------------------------------------
 
-These files show my work for two projects that required the construction
-of various functions in Python. Each function is defined below.
-Arguments are either lists (vectors), or matrices (vectors of vectors).
+These files show my work for two projects that required the development
+of various Python procedures that perform operations associated with
+vector spaces, matrices, and linear transformations.
+
+All functions are defined below.
 
 ------------------------------------------------------------------------
 
