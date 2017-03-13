@@ -1,0 +1,278 @@
+Sam Cacela
+25 April - 9 May 2016
+Python Procedures II
+------------------------------------------------------------------------
+
+
+I. Function Definitions
+
+
+def isvectorset(x):
+	return True if all(len(i)==len(x[0]) for i in x) else False
+
+
+def ismatrix(x):
+	return True if all(len(i)==len(x[0]) for i in x) else False
+
+
+def determinant(A):
+    n=len(A)
+    if (n>2):
+        i=1
+        w=0
+        sum=0
+        while w<=n-1:
+            d={}
+            w1=1
+            while w1<=n-1:
+                h=0
+                d[w1]=[]
+                while h<=n-1:
+                    if (h==w):
+                        u=0
+                    else:
+                        d[w1].append(A[w1][h])
+                    h+=1
+                w1+=1
+            A1=[d[x] for x in d]
+            sum=sum+i*(A[0][w])*(det(A1))
+            i=i*(-1)
+            w+=1
+        return sum
+    else:
+        return (A[0][0]*A[1][1]-A[0][1]*A[1][0])
+
+
+def issquare(A):
+	if not all(len(A) == len(x) for x in A):
+		return False
+	else:
+		return True
+
+
+def islinind(x):
+	if not ismatrix(x) and not issquare(x):
+		print ("error: argument not of proper format.")
+	else:
+		return True if determinant(x) != 0 else False
+
+
+def isextra(i, x):
+	if not ismatrix(x):
+		print ("error: argument not of proper format.")
+	else:
+		for y in range(len(x)):
+			if x[y]==x[i]:
+				return True
+			else:
+				return False
+
+
+def coordinates(x, B):
+	return backsub(B, x)
+
+
+def isUT(M):
+	if not ismatrix(M):
+		print ("error: S should be a matrix")
+	else:
+		for x in range(len(M)):
+			for y in range(len(M[x])):
+				if y < x and M[x][y] != 0:
+					return False
+				return True
+
+from copy import deepcopy
+
+
+def check_for_zeros(M,i,j):
+    #Check matrix M to see if only zeros exist at or below row i in column j
+    #Returns
+        #Nzero_sum: the count of non zero entries
+        #first_non_zero: index of the first non zero value
+    non_zeros = []
+    first_non_zero = -1
+    for h in range(i,len(M)):
+        non_zero = M[h][j]!=0
+        non_zeros.append(non_zero)
+        if first_non_zero==-1 and non_zero:
+            first_non_zero = h
+    Nzero_sum = sum(non_zeros)
+    return Nzero_sum, first_non_zero
+
+
+def swap(A, j, k):
+    #Swap rows j and k in matrix A
+    tempA = [x for x in A]
+    A[j] = A[k]
+    A[k] = tempA[j]
+    return A
+
+
+def make_ident(rows,cols):
+    #Make an identity matrix with dimensions rows X cols
+    #Returns: identity matrix
+    ident = []
+    for i in range(0,rows):
+        r = []
+        for j in range(0,cols):
+            elem = 0
+            if i==j:
+                elem = 1
+            r.append(elem)
+        ident.append(r)
+    return ident
+
+
+def invertUT(M):
+    #deepcopy M to protect original
+    M = deepcopy(M)
+
+    #Get dimensions of M
+    rows = len(M)
+    cols = len(M[0])
+
+    #Get identity matrix
+    ident = make_ident(rows,cols)
+    #append it to the right of M
+    for i in range(0,rows):
+        M[i]+=ident[i]
+    i = 0
+    for j in range(0,cols):
+        #Check for any nonzero values below current row in the current column
+        Nzero_sum, first_non_zero = check_for_zeros(M,i,j)
+        #If everything is zero, increment the columns
+        if Nzero_sum==0:
+            if j==cols:
+                return M
+        #If M[i][j] is 0 and there is a nonzero value below it, swap the rows
+        if first_non_zero != i:
+            M = swap(M,i,first_non_zero)
+        #Divide M[i] by M[i][j] to make M[i][j] equal 1
+        M[i] = [h/M[i][j] for h in M[i]]
+        #Rescale all other rows to make their values 0 below X[i][j]
+        for g in range(0,rows):
+            if g!=i:
+                rescaled_row = [M[g][j] * h for h in M[i]]
+                M[g]= [M[g][h] - rescaled_row[h] for h in range(0,len(rescaled_row))]
+        #If either is true, done iterating through matrix
+        if i==rows or j==cols:
+            break
+        i+=1
+    #isolate the inverse (right hand matrix)
+    for i in range(0,rows):
+        M[i] = M[i][cols:len(M[i])]
+    return M
+
+
+def null(A):
+	return [0 for x in range(len(A[0]))]
+
+
+def span(S):
+	if not ismatrix(S):
+		print ("error: S should be a matrix")
+	else:
+		return S[0]
+
+
+def backsub(A, b):
+	n = len(A)
+	if len(b) != n:
+	   print("error: non-square matrix")
+	else:
+		x = [0.0] * n
+		for i in reversed(range(n)):
+		   E = b[i]
+		   for j in range(i+1, n):
+		       E -= A[i][j] * x[j]
+		   x[i] = E/A[i][i]
+		return x
+
+
+------------------------------------------------------------------------
+
+
+II. Sample Outputs
+
+
+
+>>> isvectorset([[8, 6], [0, 3], [2, 9]])
+True
+>>> isvectorset([[8, 6], [0, 3], [2, 9, 7]])
+False
+
+
+>>> ismatrix([[8, 6], [0, 3], [2, 9]])
+True
+>>> ismatrix([[8, 6], [0, 3], [2, 9, 7]])
+False
+
+>>> A = [[2, 5], [-3, 7]]
+>>> determinant(A)
+29
+>>> islinind(A)
+True
+>>> B = [[1, 2, 3, 4], [5, 6]]
+>>> islinind(B)
+error: argument not of proper format.
+>>> C = [[1, 1], [1, 1]]
+>>> determinant(C)
+0
+>>> islinind(C)
+False
+
+			
+>>> x = [[1, 2, 3, 4], [2, 3, 4, 5], [1, 2, 3, 4]]
+>>> isextra(0, x)
+True
+>>> isextra(1, x)
+False
+>>> isextra(2, x)
+True
+
+
+>>> A = [[1, -2], [0, 1]]
+>>> b = [-7, 2]
+>>> coordinates(b, A)
+[-3.0, 2.0]
+
+
+>>> C = [[1, 2, 3], [0, 4, 5], [0, 0, 6]]
+>>> d = [62, 101, -66]
+>>> coordinates(d, C)
+[17.0, 39.0, -11.0]
+
+
+>>> isUT([[1, 2, 3], [0, 4, 5], [0, 0, 6]])
+True
+>>> isUT([[1, 2, 3], [1, 4, 5], [0, 0, 6]])
+False
+>>> isUT([[1, 2, 3, 8], [1, 4, 5]])
+error: S should be a matrix
+
+
+>>> from copy import deepcopy
+>>> invertUT([[4, 7], [2, 6]])
+[[0.6000000000000001, -0.7000000000000001], [-0.2, 0.4]]
+
+
+>>> null([[0, 1, 2], [3, 4, 5]])
+[0, 0, 0]
+
+
+>>> S = [[5, -4, 1], [-1, 0, 2]]
+>>> span(S)
+[5, -4, 1]
+
+
+>>> A = [[1, 2, 3], [0, 4, 5], [0, 0, 6]]
+>>> b = [62, 101, -66]
+>>> backsub(A, b)
+[17.0, 39.0, -11.0]
+>>> C = [[1, 2, 3], [0, 4, 5], [0, 0, 6]]
+>>> d = [62, 101, -66]
+>>> backsub(C, d)
+[17.0, 39.0, -11.0]
+
+

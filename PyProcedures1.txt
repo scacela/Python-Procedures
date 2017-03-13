@@ -1,0 +1,193 @@
+Sam Cacela
+2 March 2016
+Python Procedures I
+------------------------------------------------------------------------
+
+
+I. Function Definitions
+
+
+
+def vadd(v, w): return [x+y for (x, y) in zip(v, w)]
+
+def cmult(c, v): return ([x * c for x in v])
+
+def vzero(n): return [0 for x in n]
+
+def vneg(v): return [-x for x in v]
+
+def dot(v, w):
+	total = 0
+	for x in range(0, len(v)):
+		total += v[x] * w[x]
+	return total
+
+def sbasis(j,n): return [0 if (i != j) else 1 for i in range(n)]
+
+def vsum(vlist): return [sum(sum(vlist, []))]
+
+def lincomb(clist, vlist): return [x*y for (x, y) in zip(clist, vlist)]
+
+def madd(A, B):
+    added = []
+    for x in range(len(A)):
+        rows = []
+        for y in range(len(A[0])):
+            rows.append(A[x][y]+B[x][y])
+        added.append(rows)
+    return added
+
+def cmmult(c, A):
+    multed = []
+    for x in range(len(A)):
+        rows = []
+        for y in range(len(A[0])):
+            rows.append(A[x][y]*c)
+        multed.append(rows)
+    return multed
+
+def mzero(m, n): return [[0 for x in range(n)] for x in range(m)]
+def mneg(A):
+    multed = []
+    for x in range(len(A)):
+        rows = []
+        for y in range(len(A[0])):
+            rows.append(A[x][y]* -1)
+        multed.append(rows)
+    return multed
+
+def ID(n):
+	return [[1 if x == y else 0 for x in range(n)] for y in range(n)]
+
+def shape(A): return [len(A), len(A[0])]
+
+def transpose(A):
+    return [[rows[x] for rows in A] for x in range(len(A[0]))]
+
+def mvmult(A, v):
+    multed = []
+    for x in range(len(A)):
+        rows = []
+        for y in range(len(A[0])):
+            rows.append(A[x][y]*v[y])
+        multed.append(rows)
+    return [sum(multed[x-1]), sum(multed[y-1])]
+
+def mmult(A, B):
+	return [[sum(A[g][x]*B[x][h]
+	for x in range(len(B)))
+	for h in range(len(B[0]))]
+	for g in range(len(A))]
+
+def acompatible(A, B): return shape(A) == shape(B)
+
+def mcompatible(A, B): return range(len(B)) == range(len(A[0]))
+
+def mtov(A):
+    mtoved = []
+    for x in range(len(A)):
+        for y in range(len(A[0])):
+            mtoved.append(A[x][y])
+    return mtoved
+
+def swap(j, k, A):
+    tempA = [x for x in A]
+    A[j] = A[k]
+    A[k] = tempA[j]
+    return A
+
+def addrow(c, j, k, A):
+    A[k] = vadd(cmult(c, A[j]), A[k])
+    return A
+
+def augment(A, B): return [A[x] + B[x] for x in range(len(A))]
+
+
+------------------------------------------------------------------------
+
+
+II. Sample Outputs
+
+
+
+>>> vadd([25, 26, 27], [1, 2, 3])
+[26, 28, 30]
+
+>>> cmult(2, [3, 4, -5])
+[6, 8, -10]
+
+>>> vzero(["Hi", "I", "am", "Sam"])
+[0, 0, 0, 0]
+
+>>> vneg([1, -2, -5])
+[-1, 2, 5]
+
+>>> dot([0, 1, 5], [2, 2, 3])
+17
+
+>>> sbasis (4, 6)
+[0, 0, 0, 0, 1, 0]
+
+>>> vsum([[1, 8, 2], [5, 7], [9, 3, 7, 10]])
+[52]
+
+>>> lincomb([3, 8, 2], [1, 7, 4])
+[3, 56, 8]
+
+>>> madd([[3, 9], [-1, 11]], [[4, 13], [5, -2]])
+[[7, 22], [4, 9]]
+
+>>> cmmult(7, [[3, 9], [-1, 11]])
+[[21, 63], [-7, 77]]
+
+>>> mzero(3, 2)
+[[0, 0], [0, 0], [0, 0]]
+
+>>> mneg([[3, 9], [-1, 11]])
+[[-3, -9], [1, -11]]
+
+>>> ID(3)
+[[1, 0, 0], [0, 1, 0], [0, 0, 1]]
+
+>>> shape([[3, 9, 0], [-1, 11, 7]])
+[2, 3]
+
+>>> transpose([[3, 9, 0], [-1, 11, 7]])
+[[3, -1], [9, 11], [0, 7]]
+
+>>> mvmult([[3, 9, 0], [-1, 11, 7]], [-5, 6, 3])
+[39, 92]
+>>> mvmult([[3], [7]], [-5])
+[-15, -35]
+
+>>> mmult([[3, 9, 0], [-1, 11, 7]], [[-5, 6], [4, 5], [3, 4]])
+[[21, 63], [70, 77]]
+>>> mmult([[3, 9, 0], [-1, 11, 7]], [[-5], [6], [3]])
+[[39], [92]]
+
+>>> acompatible([[3, 9, 0], [-1, 11, 7]], [[-5, 6], [4, 5], [3, 4]])
+False
+>>> acompatible([[3, 9, 0], [-1, 11, 7]], [[-5, 6, 8], [4, 5, 9]])
+True
+
+>>> mcompatible([[3, 9, 0], [-1, 11, 7]], [[-5, 6], [4, 5], [3, 4]])
+True
+>>> mcompatible([[3, 9, 0], [-1, 11, 7]], [[-5, 6, 8], [4, 5, 9]])
+False
+
+>>> mtov([[3, 9, 0], [-1, 11, 7]])
+[3, 9, 0, -1, 11, 7]
+>>> mtov([[6], [4]])
+[6, 4]
+>>> mtov([[3, 9], [7, 2]])
+[3, 9, 7, 2]
+
+>>> swap(0, 2, [[0, 9, 4, 1], [3, 2, 14, 7], [6, 8, -11, 5], [1, 0, -2, 12]])
+[[6, 8, -11, 5], [3, 2, 14, 7], [0, 9, 4, 1], [1, 0, -2, 12]]
+
+>>> addrow(3, 0, 2, [[0, 9, 4, 1], [3, 2, 14, 7], [6, 8, -11, 5], [1, 0, -2, 12]])
+[[0, 9, 4, 1], [3, 2, 14, 7], [6, 35, 1, 8], [1, 0, -2, 12]]
+
+>>> augment([[2, 3, 1, 4], [-1, 0, 2, 7]], [[-1, 0], [-3, 8]])
+[[2, 3, 1, 4, -1, 0], [-1, 0, 2, 7, -3, 8]]
+
