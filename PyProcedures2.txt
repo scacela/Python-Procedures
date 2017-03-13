@@ -213,16 +213,18 @@ False
 >>> C = [[1, 1], [1, 1]]
 >>> determinant(A)
 29
+>>> determinant(C)
+0
 >>> issquare(A)
 True
 >>> issquare(B)
 False
+>>> issquare(C)
+True
 >>> islinind(A)
 True
 >>> islinind(B)
 error: argument not of proper format.
->>> determinant(C)
-0
 >>> islinind(C)
 False
 
