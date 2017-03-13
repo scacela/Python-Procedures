@@ -210,6 +210,7 @@ False
 
 >>> A = [[2, 5], [-3, 7]]
 >>> B = [[2, 5], [-3, 7, 4]]
+>>> C = [[1, 1], [1, 1]]
 >>> determinant(A)
 29
 >>> issquare(A)
@@ -218,10 +219,8 @@ True
 False
 >>> islinind(A)
 True
->>> B = [[1, 2, 3, 4], [5, 6]]
 >>> islinind(B)
 error: argument not of proper format.
->>> C = [[1, 1], [1, 1]]
 >>> determinant(C)
 0
 >>> islinind(C)
