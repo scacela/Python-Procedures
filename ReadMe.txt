@@ -5,8 +5,8 @@ Villanova University
 ------------------------------------------------------------------------
 
 These two projects required the construction of various functions written
-in Python. Each function performs its own operation on the argument(s) it
-passes. Arguments are either lists (vectors), or matrices (vectors of vectors).
+in Python. Each function is defined below. Parameters are either lists
+(vectors), or matrices (vectors of vectors).
 
 ------------------------------------------------------------------------
 
